@@ -1,1 +1,0 @@
-rootProject.name = "apk-dependency-core-gradle-plugin"

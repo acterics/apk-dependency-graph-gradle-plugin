@@ -36,7 +36,7 @@ let objcdv = {
                 var node = this.nodesSet[nodeName];
                 if (node == null) {
                     var idx = this.node_index;
-                    this.nodesSet[nodeName] = node = {idx: idx, name: nodeName, source: 1, dest: 0};
+                    this.nodesSet[nodeName] = node = { idx: idx, name: nodeName, source: 1, dest: 0 };
                     this.node_index++;
                 }
                 return node
@@ -49,10 +49,10 @@ let objcdv = {
             d3jsGraph: function () {
                 // Sorting up nodes, since, in some cases they aren't returned in correct number
                 var nodes = _.values(this.nodesSet).slice(0).sort((a, b) => a.idx - b.idx);
-                return {nodes: nodes, links: this.links};
+                return { nodes: nodes, links: this.links };
             },
 
-            nodesStartingFromNode: function (node, {max_level = 100, use_backward_search = false, use_forward_search = true } = {} ) {
+            nodesStartingFromNode: function (node, { max_level = 100, use_backward_search = false, use_forward_search = true } = {}) {
                 // Figure out the neighboring node id's with brute strength because the graph is small
                 var neighbours = {};
                 neighbours[node.index] = node;
@@ -128,7 +128,7 @@ let objcdv = {
 
             _getSortedPrefixes: function () {
                 if (this._sortedPrefixes == null) {
-                    this._sortedPrefixes = _.map(this._prefixesDistr, (v, k) => ({"key": k, "value": v}))
+                    this._sortedPrefixes = _.map(this._prefixesDistr, (v, k) => ({ "key": k, "value": v }))
                         .sort((a, b) => b.value - a.value)
                         .map(o => o.key)
                 }
@@ -161,8 +161,3 @@ let objcdv = {
     }
 
 };
-
-
-
-
-

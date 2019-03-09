@@ -97,7 +97,7 @@ let graph_actions = {
                     .transition();
             },
 
-            _isDependencyLink: (node, link) =>  (link.source.index === node.index),
+            _isDependencyLink: (node, link) => (link.source.index === node.index),
             _nodeExistsInLink: (node, link) => (link.source.index === node.index || link.target.index == node.index),
             _oppositeNodeOfLink: (node, link) => (link.source.index == node.index ? link.target : link.target.index == node.index ? link.source : null),
 
@@ -105,9 +105,9 @@ let graph_actions = {
                 this.svg.selectAll('.link')
                     .filter((link) => nodeNeighbors.indexOf(link.source.index) > -1)
                     .classed('filtered', false)
-                    .classed('dependency', (l) => this._nodeExistsInLink(root,l) && this._isDependencyLink(root, l))
-                    .classed('dependants', (l) => this._nodeExistsInLink(root,l) && !this._isDependencyLink(root, l))
-                    .attr("marker-end", (l) => this._nodeExistsInLink(root,l) ? (this._isDependencyLink(root, l) ? "url(#dependency)" : "url(#dependants)") : (maxLevel == 1 ? "" : "url(#default)"))
+                    .classed('dependency', (l) => this._nodeExistsInLink(root, l) && this._isDependencyLink(root, l))
+                    .classed('dependants', (l) => this._nodeExistsInLink(root, l) && !this._isDependencyLink(root, l))
+                    .attr("marker-end", (l) => this._nodeExistsInLink(root, l) ? (this._isDependencyLink(root, l) ? "url(#dependency)" : "url(#dependants)") : (maxLevel == 1 ? "" : "url(#default)"))
                     .transition();
             },
 
@@ -118,7 +118,7 @@ let graph_actions = {
                 this._selectAndLockNode(node, "level" + maxLevel);
 
                 let neighborIndexes =
-                    this.dvgraph.nodesStartingFromNode(node, {max_level: maxLevel, use_backward_search: maxLevel == 1})
+                    this.dvgraph.nodesStartingFromNode(node, { max_level: maxLevel, use_backward_search: maxLevel == 1 })
                         .map((n) => n.index);
 
                 this._fadeOutAllNodesAndLinks();
@@ -129,4 +129,3 @@ let graph_actions = {
         };
     }
 };
-
