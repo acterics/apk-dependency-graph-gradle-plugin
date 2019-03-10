@@ -24,6 +24,11 @@ kotlinFrontend {
     sourceMaps = true
 
     npm {
+        dependency("d3")
+        dependency("jquery")
+        dependency("sidr")
+        dependency("underscore")
+        
 //        dependency("css-loader")
 //        dependency("style-loader")
 //        devDependency("karma")
@@ -33,7 +38,7 @@ kotlinFrontend {
         (this as WebPackExtension).apply {
             port = 8080
             publicPath = "/frontend/"
-            proxyUrl = "http://localhost:9000"
+//            proxyUrl = "http://localhost:9000"
         }
     }
 
