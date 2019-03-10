@@ -1,6 +1,6 @@
-package com.acterics.wmu.gradle.tasks
+package com.acterics.dependencygraph.gradle.tasks
 
-import com.acterics.wmu.gradle.core.ApkSmaliDecoder
+import com.acterics.dependencygraph.gradle.core.ApkSmaliDecoder
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputDirectory
@@ -18,7 +18,7 @@ open class DecodeApkTask: DefaultTask() {
     lateinit var outputDirectory: String
 
     private val decoder: ApkSmaliDecoder by lazy {
-        ApkSmaliDecoder(apkFilePath, outputDirectory,28)
+        ApkSmaliDecoder(apkFilePath, outputDirectory, 28)
     }
 
     @TaskAction

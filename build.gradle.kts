@@ -1,38 +1,26 @@
-plugins {
-    `kotlin-dsl`
-    `java-gradle-plugin`
-    id("com.gradle.plugin-publish") version "0.10.0"
+//plugins {
+//   `kotlin-dsl`
+//}
+//
+//configure<KotlinDslPluginOptions> {
+//   experimentalWarning.set(false)
+//}
+
+task("copyWebBundleToCoreResources", Copy::class) {
+   val inputDirectory = "${project("web").buildDir}/bundle"
+   println("input directory: $inputDirectory")
+   val coreProject = project("plugin")
+   val outputDirectory = "${coreProject.projectDir}/src/main/resources/web"
+
+
+   println("output directory: $outputDirectory")
+
+   from(file(inputDirectory))
+   into(file(outputDirectory))
 }
 
-configure<KotlinDslPluginOptions> {
-    experimentalWarning.set(false)
+afterEvaluate {
+
+   tasks["copyWebBundleToCoreResources"].dependsOn("web:webpack-bundle")
+//   project("plugin").tasks["assemble"].dependsOn("copyWebBundleToCoreResources")
 }
-
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation("org.smali:baksmali:2.2.6")
-    implementation("com.google.guava:guava:24.1-jre")
-}
-
-pluginBundle {
-    website = "https://github.com/acterics"
-    vcsUrl = "https://github.com/acterics/apk-dependency-graph-gradle-plugin"
-    tags = listOf("android", "apk-dependency-graph")
-}
-
-gradlePlugin {
-    plugins {
-        create("ApkDependencyGraphGenerator") {
-            id = "com.acterics.apk-dependency-graph-generator"
-            displayName = "Apk dependency graph generator"
-            description = "Gradle plugin for visualization your apk dependency graph"
-            implementationClass = "com.acterics.wmu.gradle.ApkDependencyGraphPlugin"
-            version = "0.9.0"
-        }
-    }
-}
-

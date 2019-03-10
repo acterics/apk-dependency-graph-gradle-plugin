@@ -1,0 +1,32 @@
+{
+    ":": {
+        "conventions": [
+            
+        ],
+        "configurations": [
+            
+        ],
+        "extensions": [
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.gradle.api.Project",
+                "name": "ext"
+            }
+        ]
+    },
+    ":plugin": {
+        "conventions": [
+            
+        ],
+        "configurations": [
+            
+        ],
+        "extensions": [
+            {
+                "type": "org.gradle.api.plugins.ExtraPropertiesExtension",
+                "target": "org.gradle.api.Project",
+                "name": "ext"
+            }
+        ]
+    }
+}

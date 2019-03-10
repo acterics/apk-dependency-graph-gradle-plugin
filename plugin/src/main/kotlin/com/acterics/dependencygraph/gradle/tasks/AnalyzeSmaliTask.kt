@@ -1,8 +1,8 @@
-package com.acterics.wmu.gradle.tasks
+package com.acterics.dependencygraph.gradle.tasks
 
-import com.acterics.wmu.gradle.core.AnalyzerResult
-import com.acterics.wmu.gradle.core.DependenciesFileWriter
-import com.acterics.wmu.gradle.core.SmaliAnalyzer
+import com.acterics.dependencygraph.gradle.core.AnalyzerResult
+import com.acterics.dependencygraph.gradle.core.DependenciesFileWriter
+import com.acterics.dependencygraph.gradle.core.SmaliAnalyzer
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.OutputDirectory

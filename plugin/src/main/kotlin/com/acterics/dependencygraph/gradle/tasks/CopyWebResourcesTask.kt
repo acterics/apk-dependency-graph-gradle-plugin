@@ -1,4 +1,4 @@
-package com.acterics.wmu.gradle.tasks
+package com.acterics.dependencygraph.gradle.tasks
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.OutputDirectory

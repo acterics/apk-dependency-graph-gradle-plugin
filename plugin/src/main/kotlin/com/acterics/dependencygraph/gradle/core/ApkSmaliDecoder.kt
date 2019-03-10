@@ -1,4 +1,4 @@
-package com.acterics.wmu.gradle.core
+package com.acterics.dependencygraph.gradle.core
 
 import org.jf.baksmali.Baksmali
 import org.jf.baksmali.BaksmaliOptions

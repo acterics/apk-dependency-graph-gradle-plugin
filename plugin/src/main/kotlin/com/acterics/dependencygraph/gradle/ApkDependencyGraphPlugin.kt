@@ -1,8 +1,8 @@
-package com.acterics.wmu.gradle
+package com.acterics.dependencygraph.gradle
 
-import com.acterics.wmu.gradle.tasks.AnalyzeSmaliTask
-import com.acterics.wmu.gradle.tasks.CopyWebResourcesTask
-import com.acterics.wmu.gradle.tasks.DecodeApkTask
+import com.acterics.dependencygraph.gradle.tasks.AnalyzeSmaliTask
+import com.acterics.dependencygraph.gradle.tasks.CopyWebResourcesTask
+import com.acterics.dependencygraph.gradle.tasks.DecodeApkTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.task
