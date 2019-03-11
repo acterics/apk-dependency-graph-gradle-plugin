@@ -5,8 +5,13 @@ var dependencies = {
             "dest": "B"
         },
         {
-            "source": "A",
+            "source": "AD",
             "dest": "C"
+        },
+        {
+            "source": "AD",
+            "dest": "B"
         }
+
     ]
 }

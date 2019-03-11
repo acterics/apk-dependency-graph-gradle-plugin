@@ -34,10 +34,16 @@ kotlinFrontend {
 //        devDependency("karma")
     }
 
+    // webpackBundle {
+    //     contentPath = file("src/main/resources")
+
+    // }
+
     bundle<WebPackExtension>("webpack") {
         (this as WebPackExtension).apply {
+            // contentPath = file("src/main/resources")
             port = 8080
-            publicPath = "/frontend/"
+            publicPath = "/bundle"
 //            proxyUrl = "http://localhost:9000"
         }
     }

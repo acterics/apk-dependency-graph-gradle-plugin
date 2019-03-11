@@ -35,7 +35,7 @@ class Graph() {
         nodes.forEach(function)
     }
 
-    fun d3jsGraph(): D3JsGraph {
+    fun d3Graph(): D3JsGraph {
         val nodes = nodes.sortedBy { it.idx }
         return D3JsGraph(nodes, links)
     }
