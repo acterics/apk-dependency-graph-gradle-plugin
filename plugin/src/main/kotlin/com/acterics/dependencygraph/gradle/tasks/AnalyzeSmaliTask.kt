@@ -11,6 +11,8 @@ import java.io.File
 
 open class AnalyzeSmaliTask: DefaultTask() {
 
+    lateinit var filterPackage: String
+
     @InputDirectory
     lateinit var decodedApkDirectory: String
 
@@ -20,7 +22,7 @@ open class AnalyzeSmaliTask: DefaultTask() {
 
 
     private val analyzer: SmaliAnalyzer by lazy {
-        SmaliAnalyzer("com.acterics", decodedApkDirectory, false)
+        SmaliAnalyzer(filterPackage, decodedApkDirectory, false)
     }
 
     @TaskAction
