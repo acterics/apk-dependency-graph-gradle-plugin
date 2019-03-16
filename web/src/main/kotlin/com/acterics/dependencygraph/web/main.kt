@@ -2,14 +2,12 @@ package com.acterics.dependencygraph.web
 
 import com.acterics.dependencygraph.web.base.Application
 import com.acterics.dependencygraph.web.base.module
-import com.acterics.dependencygraph.web.base.require
+
 import kotlin.browser.document
 import kotlin.dom.hasClass
 
 
-external val dependencies: dynamic
 
-val d3: dynamic = require("d3")!!
 
 fun main(args: Array<String>) {
     var application: Application? = null
