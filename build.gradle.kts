@@ -1,10 +1,3 @@
-//plugins {
-//   `kotlin-dsl`
-//}
-//
-//configure<KotlinDslPluginOptions> {
-//   experimentalWarning.set(false)
-//}
 
 task("copyWebBundleToCoreResources", Copy::class) {
    val inputDirectory = "${project("web").buildDir}/bundle"

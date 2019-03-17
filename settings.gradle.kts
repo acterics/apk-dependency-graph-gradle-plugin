@@ -2,9 +2,11 @@ rootProject.name = "apk-dependency-graph-gradle-plugin"
 
 include("web")
 include("plugin")
+include("sample")
 
 pluginManagement {
     repositories {
+        mavenLocal()
         gradlePluginPortal()
         maven { setUrl("https://jcenter.bintray.com/") }
         maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
