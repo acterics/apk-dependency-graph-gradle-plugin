@@ -17,10 +17,11 @@ class MainApplication: Application() {
     private var node: dynamic = null
     private var text: dynamic = null
 
-    private var chargeMultiplier = 2000
+    private var chargeMultiplier = 10
     private var defaultLinkDistance = 100
     private var defaultLinkStrength = 0.7
     private var defaultMaxTextLength = 20
+    private var defaultRadius = 2.5
 
     override fun start(state: Map<String, Any>) {
         println("Hello world with hot reload!!")
@@ -90,11 +91,11 @@ class MainApplication: Application() {
         simulation.nodes(d3Graph.nodes)
                 .on("tick", this::ticked)
 
-        text = graphContainer.append("g")
-                .selectAll("text")
-                .data(simulation.nodes())
-                .enter().append("text")
-                .text { d -> d.name.substring(0, defaultMaxTextLength) }
+        // text = graphContainer.append("g")
+        //         .selectAll("text")
+        //         .data(simulation.nodes())
+        //         .enter().append("text")
+        //         .text { d -> d.name.substring(0, defaultMaxTextLength) }
 
         simulation.force("link")
                 .links(d3Graph.links)
@@ -106,8 +107,8 @@ class MainApplication: Application() {
                 }          
     }
 
-    private fun radius(node: Node): Int {
-        return DEFAULT_RADIUS + DEFAULT_RADIUS * node.source / 10
+    private fun radius(node: Node): Double {
+        return defaultRadius + defaultRadius * node.source.toDouble() / 10
     }
 
     private fun transform(node: dynamic): String {
@@ -163,7 +164,5 @@ class MainApplication: Application() {
 
     override fun dispose() = mapOf<String, Any>()
 
-    companion object {
-        private const val DEFAULT_RADIUS = 10
-    }
+
 }
