@@ -59,7 +59,7 @@ text.skipped {
     stroke: #999;
     stroke-opacity: .6;
     fill: none;
-    stroke-width: 1.5px;
+    stroke-width: 1px;
     pointer-events: none;
 }
 
@@ -116,7 +116,7 @@ form input::placeholder {
     color: white;
 }
 
-#form-background {
+.form-background {
     position: absolute;
     right: 0px;
     top: 60px;

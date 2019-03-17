@@ -1,5 +1,6 @@
 package com.acterics.dependencygraph.gradle.tasks
 
+import com.acterics.dependencygraph.gradle.ApkDependencyGraphPluginExtension
 import com.acterics.dependencygraph.gradle.core.ApkSmaliDecoder
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.InputFile
@@ -11,15 +12,21 @@ open class DecodeApkTask: DefaultTask() {
         description = "Decode apk file to smali"
     }
 
+    lateinit var extension: ApkDependencyGraphPluginExtension
+
     @InputFile
-    lateinit var apkFilePath: String
+    fun getApkFilePath() = extension.apkPath ?: ""
+
 
     @OutputDirectory
     lateinit var outputDirectory: String
 
-    private val decoder: ApkSmaliDecoder by lazy {
-        ApkSmaliDecoder(apkFilePath, outputDirectory, 28)
-    }
+    private val decoder: ApkSmaliDecoder
+        get() = ApkSmaliDecoder(
+                getApkFilePath(),
+                outputDirectory,
+                extension.apiVersion
+        )
 
     @TaskAction
     fun run() = decoder.decode()

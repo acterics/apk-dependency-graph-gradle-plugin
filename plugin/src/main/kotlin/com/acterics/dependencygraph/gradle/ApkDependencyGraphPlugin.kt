@@ -10,15 +10,14 @@ import org.gradle.kotlin.dsl.task
 open class ApkDependencyGraphPlugin: Plugin<Project> {
 
     override fun apply(project: Project) {
-        val extension = project.extensions.create<ApkDependencyGraphPluginExtension>("apkDependencyGraph")
+        val pluginExtension = project.extensions.create<ApkDependencyGraphPluginExtension>("apkDependencyGraph")
 
 
 
         project.task("decodeApk", DecodeApkTask::class) {
             group = "dependency graph"
             outputDirectory = "${project.buildDir.absolutePath}/apk-dependency-graph/smali"
-//            apkFilePath = "${project.buildDir.absolutePath}/outputs/apk/debug/app-debug.apk"
-            apkFilePath = extension.apkPath ?: ""
+            extension = pluginExtension
         }
 
         project.task("copyApkGraphWebResources", CopyWebResourcesTask::class) {
@@ -26,11 +25,11 @@ open class ApkDependencyGraphPlugin: Plugin<Project> {
             outputDirectory = "${project.buildDir.absolutePath}/apk-dependency-graph/web"
         }
 
-        project.task("analyzeSmali", AnalyzeSmaliTask::class) {
+        project.task("buildGraph", AnalyzeSmaliTask::class) {
             group = "dependency graph"
-            filterPackage = extension.filterPackage
             decodedApkDirectory = "${project.buildDir.absolutePath}/apk-dependency-graph/smali"
             outputDirectory = "${project.buildDir.absolutePath}/apk-dependency-graph/web"
+            extension = pluginExtension
             dependsOn("decodeApk", "copyApkGraphWebResources")
         }
 
