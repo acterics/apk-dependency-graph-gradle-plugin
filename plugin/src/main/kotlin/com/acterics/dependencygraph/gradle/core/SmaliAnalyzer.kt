@@ -67,8 +67,6 @@ class SmaliAnalyzer(private val filter: String,
     private fun File.processSmaliFile() {
         if (!isFileToProcess()) { return }
 
-        println("start processing file: $name")
-
         val fileReader = this.bufferedReader()
         var fileName = name.substring(0, name.lastIndexOf("."))
 
@@ -110,6 +108,7 @@ class SmaliAnalyzer(private val filter: String,
     }
 
     private fun addDependencies(fileName: String, dependencyNames: Set<String>) {
+        println("add dependency: $fileName -> $dependencyNames")
         if (dependencies.containsKey(fileName)) {
             dependencies[fileName] = dependencies[fileName]!! + dependencyNames
         } else {

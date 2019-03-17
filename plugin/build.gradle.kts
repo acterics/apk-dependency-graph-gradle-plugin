@@ -1,10 +1,14 @@
 import com.gradle.publish.PluginBundleExtension
 
 plugins {
-   `kotlin-dsl`
-   `java-gradle-plugin`
-   id("com.gradle.plugin-publish") version "0.10.0"
+    `kotlin-dsl`
+    `java-gradle-plugin`
+    `maven-publish`
+    id("com.gradle.plugin-publish") version "0.10.0"
 }
+
+version = "0.11.4"
+group = "com.acterics"
 
 repositories {
    mavenCentral()
@@ -13,6 +17,17 @@ repositories {
 dependencies {
    "implementation"("org.smali:baksmali:2.2.6")
    "implementation"("com.google.guava:guava:24.1-jre")
+}
+
+configure<PublishingExtension> {
+    publications {
+        create("pluginPublication", MavenPublication::class) {
+            from(components.findByName("java"))
+            groupId = project.group.toString()
+            version = project.version.toString()
+            artifactId = "apk-dependency-graph-generator"
+        }
+    }
 }
 
 configure<PluginBundleExtension> {
@@ -28,7 +43,6 @@ configure<GradlePluginDevelopmentExtension> {
          displayName = "Apk dependency graph generator"
          description = "Gradle plugin for visualization your apk dependency graph"
          implementationClass = "com.acterics.dependencygraph.gradle.ApkDependencyGraphPlugin"
-         version = "0.11.0"
       }
    }
 }

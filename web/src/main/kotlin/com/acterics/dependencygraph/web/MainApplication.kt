@@ -17,7 +17,7 @@ class MainApplication: Application() {
     private var node: dynamic = null
     private var text: dynamic = null
 
-    private var chargeMultiplier = 200
+    private var chargeMultiplier = 2000
     private var defaultLinkDistance = 100
     private var defaultLinkStrength = 0.7
     private var defaultMaxTextLength = 20
