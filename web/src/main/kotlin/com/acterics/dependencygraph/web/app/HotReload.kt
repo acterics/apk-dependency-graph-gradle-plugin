@@ -1,4 +1,4 @@
-package com.acterics.dependencygraph.web.base
+package com.acterics.dependencygraph.web.app
 
 external val module: Module
 

@@ -1,13 +1,11 @@
 package com.acterics.dependencygraph.web
 
-import com.acterics.dependencygraph.web.base.Application
-import com.acterics.dependencygraph.web.base.module
+import com.acterics.dependencygraph.web.app.Application
+import com.acterics.dependencygraph.web.app.MainApplication
+import com.acterics.dependencygraph.web.app.module
 
 import kotlin.browser.document
 import kotlin.dom.hasClass
-
-
-
 
 fun main(args: Array<String>) {
     var application: Application? = null
