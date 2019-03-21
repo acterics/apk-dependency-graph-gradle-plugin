@@ -9,24 +9,23 @@ import kotlin.math.sqrt
 
 class GraphVisualizer(private val svg: dynamic,
                       private var d3Graph: D3Graph) {
-    data class Config(var linkDistance: Int = 10,
-                      var linkStrength: Double = 0.4,
+    data class Config(var linkDistance: Int = 5,
+                      var linkStrength: Double = 0.7,
                       var circleRadius: Int = 15,
                       var showCircleText: Boolean = false,
                       var maxTextLength: Int = 100,
-                      var chargeMultiplier: Int = 200)
+                      var chargeMultiplier: Int = 100)
 
     var simutalion: dynamic = null
-    var objectNodes: dynamic = null
-    var allNodes: dynamic = null
     var color: dynamic = null
 
-    private val config = Config()
 
-    private var link: dynamic = null
-    private var node: dynamic = null
-    private var textNode: dynamic = null
-    private var structNode: dynamic = null
+
+    var links: dynamic = null
+    var nodes: dynamic = null
+    var textNode: dynamic = null
+
+    private val config = Config()
 
     init {
         initialize()
@@ -46,7 +45,34 @@ class GraphVisualizer(private val svg: dynamic,
     }
 
     fun updateGraph(d3Graph: D3Graph) {
+        simutalion.stop()
 
+        svg.selectAll(".node")
+                .data(emptyArray<dynamic>())
+                .exit().remove()
+        svg.select("g").selectAll("path")
+                .data(emptyArray<dynamic>())
+                .exit().remove()
+        svg.selectAll(".link")
+                .data(emptyArray<dynamic>())
+                .exit().remove()
+        svg.selectAll("text")
+                .data(emptyArray<dynamic>())
+                .exit().remove()
+        svg.append("defs").selectAll("marker")
+                .data(emptyArray<dynamic>())
+                .exit().remove()
+        svg.append("g").selectAll(".node")
+                .data(emptyArray<dynamic>())
+                .exit().remove()
+        svg.append("g").selectAll(".structNode")
+                .data(emptyArray<dynamic>())
+                .exit().remove()
+
+        this.d3Graph = d3Graph
+        initialize()
+
+        updateTextVisibility(config.showCircleText)
     }
 
     fun updateColors(colorRegexes: dynamic) {
@@ -54,26 +80,40 @@ class GraphVisualizer(private val svg: dynamic,
     }
 
     fun updateRadiuses(defaultRadius: Int) {
-
+        config.circleRadius = defaultRadius
+        nodes.transition().attr("r", this::nodeRadius)
+        updateMarkers(defaultRadius.toDouble() / 3)
+        simutalion.alphaTarget(0.3).restart()
     }
 
     fun updateTextVisibility(visible: Boolean) {
-
+        config.showCircleText = visible
+        textNode.attr("visibility", if (visible) "visible" else "hidden")
+        simutalion.alphaTarget(0.3).restart()
     }
 
     fun updateCenter(x: Double, y: Double) {
-
+        simutalion.force("center", d3.forceCenter(x / 2, y / 2))
     }
 
     fun updateChargeAndLinks() {
-
+        updateCharge(config.chargeMultiplier)
+        updateLinkStrength(config.linkStrength)
     }
 
     fun updateCharge(chargeMultiplier: Int) {
-
+        config.chargeMultiplier = chargeMultiplier
+        simutalion.force("charge", d3.forceManyBody().strength(this::nodeChargeStrength))
+        simutalion.alphaTarget(0.3).restart()
     }
 
     fun updateLinkStrength(linkStrength: Double) {
+        config.linkStrength = linkStrength
+        simutalion.force("links", d3.forceLink(d3Graph.links)
+                .distance(this::linkDistance)
+                .strength(this::linkStrength)
+        )
+        simutalion.alphaTarget(0.3).restart()
 
     }
 
@@ -119,7 +159,6 @@ class GraphVisualizer(private val svg: dynamic,
         val dx: Double = (data.target.x - data.source.x) as Double
         val dy: Double = (data.target.y - data.source.y) as Double
         val dr = sqrt(dx * dx + dy * dy)
-
         if (abs(dr) <= EPS) {
             return "M0,0L0,0"
         }
@@ -193,8 +232,8 @@ class GraphVisualizer(private val svg: dynamic,
                 .enter().append("path")
                 .attr("class", "link")
                 .attr("marker-end", "url(#default)")
-                .style("stroke-width") { data -> data }
-        link = svg.selectAll("path.link")
+                .style("stroke-width") { 1.0 }
+        links = svg.selectAll("path.link")
     }
 
     private fun initNodes() {
@@ -207,16 +246,16 @@ class GraphVisualizer(private val svg: dynamic,
                 .attr("source") { data -> data.source }
                 .attr("dest") { data -> data.dest }
 
-        node = svg.selectAll(".node")
+        nodes = svg.selectAll(".node")
     }
 
     private fun initSimulation() {
         simutalion = d3.forceSimulation(d3.values(d3Graph.nodes))
-//                .force("x", d3.forceX())
-//                .force("y", d3.forceY())
+                .force("x", d3.forceX())
+                .force("y", d3.forceY())
                 .force("center", d3.forceCenter(x / 2, y / 2))
                 .force("charge", d3.forceManyBody().strength(this::nodeChargeStrength))
-                .force("link", d3.forceLink(d3Graph.links)
+                .force("links", d3.forceLink(d3Graph.links)
                         .distance(this::linkDistance)
                         .strength(this::linkStrength)
                 )
@@ -234,7 +273,7 @@ class GraphVisualizer(private val svg: dynamic,
     }
 
     private fun initDragging() {
-        node.call(d3.drag()
+        nodes.call(d3.drag()
                 .on("start", this::onNodeDragStarted)
                 .on("drag", this::onNodeDragged)
                 .on("end", this::   onNodeDragEnded))
@@ -246,8 +285,8 @@ class GraphVisualizer(private val svg: dynamic,
     }
 
     private fun simulationTick() {
-        link.attr("d", this::linkLine)
-        node.attr("transform", this::transform)
+        links.attr("d", this::linkLine)
+        nodes.attr("transform", this::transform)
         if (config.showCircleText) {
             textNode.attr("transform", this::transform)
         }

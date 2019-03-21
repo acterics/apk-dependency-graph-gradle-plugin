@@ -3,8 +3,9 @@
     stroke-opacity: 0.3;
 }
 
-.node.hidden {
-    visibility: hidden;
+.structNode.filtered {
+    fill-opacity: 0.3;
+    stroke-opacity: 0.3;
 }
 
 text.filtered {
@@ -16,10 +17,6 @@ text.filtered {
     stroke: #ddd;
     fill-opacity: 0.1;
     stroke-opacity: 0.1;
-}
-
-.link.hidden {
-    visibility: hidden;
 }
 
 .link.dependency {
@@ -44,6 +41,12 @@ text.skipped {
     stroke-opacity: 0;
 }
 
+.structNode.skipped {
+    fill-opacity: 0.0;
+    stroke-opacity: 0.0;
+}
+
+
 .link.skipped {
     stroke: #ddd;
     fill-opacity: 0.0;
@@ -55,11 +58,16 @@ text.skipped {
     stroke-width: 0.5px;
 }
 
-.links {
+.structNode {
+    stroke: #000;
+    stroke-width: 0.5px;
+}
+
+.link {
     stroke: #999;
     stroke-opacity: .6;
     fill: none;
-    stroke-width: 1px;
+    stroke-width: 1.5px;
     pointer-events: none;
 }
 
@@ -100,38 +108,121 @@ text {
     pointer-events: none;
 }
 
+svg text {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+svg text::selection {
+    background: none;
+}
+
 form {
     position: absolute;
     right: 10px;
     top: 60px;
-    color: white;
-    width: 370px;
 }
 
-form label {
-    color: white;
-}
-
-form input::placeholder {
-    color: white;
-}
-
-.form-background {
+.cyclesform {
     position: absolute;
-    right: 0px;
-    top: 60px;
-    width: 390px;
-    height: 350px;
-    background-color: #000;
-    filter: alpha(opacity=40);
-    -moz-opacity: 0.4;
-    -khtml-opacity: 0.4;
-    opacity: 0.4;
+    right: 10px;
+    top: 260px;
 }
 
-#simple-menu {
+#save-preferences {
     position: absolute;
     right: 10px;
     top: 10px;
-    z-index: 0;
+
+}
+
+.editor-button {
+    background: #000000;
+    background-image: -webkit-linear-gradient(top, #000000, #6a7175);
+    background-image: -moz-linear-gradient(top, #000000, #6a7175);
+    background-image: -ms-linear-gradient(top, #000000, #6a7175);
+    background-image: -o-linear-gradient(top, #000000, #6a7175);
+    background-image: linear-gradient(to bottom, #000000, #6a7175);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    text-shadow: 2px 1px 5px #000000;
+    font-family: Menlo;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+.editor-button:hover {
+    background: #545f66;
+    background-image: -webkit-linear-gradient(top, #545f66, #111112);
+    background-image: -moz-linear-gradient(top, #545f66, #111112);
+    background-image: -ms-linear-gradient(top, #545f66, #111112);
+    background-image: -o-linear-gradient(top, #545f66, #111112);
+    background-image: linear-gradient(to bottom, #545f66, #111112);
+    text-decoration: none;
+}
+
+#remove-button {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.remove-button {
+    background: #000000;
+    background-image: -webkit-linear-gradient(top, #000000, #6a7175);
+    background-image: -moz-linear-gradient(top, #000000, #6a7175);
+    background-image: -ms-linear-gradient(top, #000000, #6a7175);
+    background-image: -o-linear-gradient(top, #000000, #6a7175);
+    background-image: linear-gradient(to bottom, #000000, #6a7175);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    text-shadow: 2px 1px 5px #000000;
+    font-family: Menlo;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+.remove-button:hover {
+    background: #545f66;
+    background-image: -webkit-linear-gradient(top, #545f66, #111112);
+    background-image: -moz-linear-gradient(top, #545f66, #111112);
+    background-image: -ms-linear-gradient(top, #545f66, #111112);
+    background-image: -o-linear-gradient(top, #545f66, #111112);
+    background-image: linear-gradient(to bottom, #545f66, #111112);
+    text-decoration: none;
+}
+
+.previous {
+    background-color: #f1f1f1;
+    color: black;
+    padding: 8px 8px;
+}
+
+.next {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 10px;
+}
+
+.round {
+    border-radius: 50%;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover {
+    background-color: #ddd;
+    color: black;
 }

@@ -4,4 +4,4 @@ data class Node(val id: Int,
                 val name: String,
                 var source: Int,
                 var dest: Int,
-                var weight: Int = 0)
+                var weight: Int = 1)

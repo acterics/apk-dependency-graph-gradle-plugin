@@ -8,7 +8,7 @@ class Graph {
 
 
     fun addLink(link: Dependency) {
-        println("Add link: ${link.source} -> ${link.dest}")
+        println("Add links: ${link.source} -> ${link.dest}")
 
         val sourceNode = getNode(link.source)
         sourceNode.source++
