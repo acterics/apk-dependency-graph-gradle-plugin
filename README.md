@@ -6,11 +6,13 @@ Gradle plugin for generating apk dependency graph
 
 ## Usage
 
+### Install plugin
+
 In your app `build.gradle`
 
 ```groovy
 plugins {
-  id "com.acterics.apk-dependency-graph-generator" version "0.9.0"
+  id "com.acterics.apk-dependency-graph-generator" version "0.11.4"
 }
 ```
 
@@ -24,20 +26,36 @@ buildscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.com.acterics.apk-dependency-graph-generator:apk-dependency-core-gradle-plugin:0.9.0"
+    classpath "gradle.plugin.com.acterics.apk-dependency-graph-generator:apk-dependency-core-gradle-plugin:0.11.4"
   }
 }
 
 apply plugin: "com.acterics.apk-dependency-graph-generator"
 ```
 
-Then run
+### Configure plugin
+
+```groovy
+ppkDependencyGraphPluginExtension {
+    filterPackage = "com.acterics"
+    includeInnerClasses = false
+    apkPath = "${project.buildDir.absolutePath}/outputs/apk/debug/sample-debug.apk"
+}
+```
+
+### Build graph
+
+Run
 
 ``` bash
 ./gradlew app:buildGraph
 ```
 
 Finally open `$buildSrc/apk-dependency-graph/index.html`
+
+## Sample
+
+![Sample image](./assets/sample.png)
 
 ## Credits
 
