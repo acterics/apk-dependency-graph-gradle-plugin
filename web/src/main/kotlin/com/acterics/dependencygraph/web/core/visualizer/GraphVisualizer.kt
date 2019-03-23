@@ -9,7 +9,7 @@ import kotlin.math.sqrt
 
 class GraphVisualizer(private val svg: dynamic,
                       private var d3Graph: D3Graph) {
-    data class Config(var linkDistance: Int = 5,
+    data class Config(var linkDistance: Int = 150,
                       var linkStrength: Double = 0.7,
                       var circleRadius: Int = 15,
                       var showCircleText: Boolean = false,
@@ -192,7 +192,7 @@ class GraphVisualizer(private val svg: dynamic,
         if (!d3.event.active as Boolean) {
             simutalion.alphaTarget(0)
         }
-        if (node.fixed as? Boolean == false) {
+        if (!node.fixed) {
             node.fx = null
             node.fy = null
         }
