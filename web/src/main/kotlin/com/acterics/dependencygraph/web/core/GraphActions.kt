@@ -1,4 +1,4 @@
-package com.acterics.dependencygraph.web
+package com.acterics.dependencygraph.web.core
 
 class GraphActions(svg: dynamic, graph: Graph) {
     

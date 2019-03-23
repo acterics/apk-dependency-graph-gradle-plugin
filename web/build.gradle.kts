@@ -26,9 +26,9 @@ kotlinFrontend {
     npm {
         dependency("d3")
         dependency("d3-3d")
-        dependency("jquery")
-        dependency("sidr")
-        dependency("underscore")
+//        dependency("jquery")
+//        dependency("sidr")
+//        dependency("underscore")
         
 //        dependency("css-loader")
 //        dependency("style-loader")

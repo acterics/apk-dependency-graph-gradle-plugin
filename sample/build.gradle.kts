@@ -19,6 +19,7 @@ apply {
     plugin("android")
     plugin("kotlin-android")
     plugin("kotlin-android-extensions")
+    plugin("kotlin-kapt")
     plugin("com.acterics.apk-dependency-graph-generator")
 }
 
@@ -26,6 +27,7 @@ repositories {
     mavenCentral()
     google()
     jcenter()
+    maven(url = "https://jitpack.io")
 }
 
 configure<AppExtension> {
@@ -42,6 +44,10 @@ configure<AppExtension> {
         val kotlinAddintionalSourceSets = project.file("src/main/kotlin")
         findByName("main")?.java?.srcDirs(kotlinAddintionalSourceSets)
     }
+
+    lintOptions {
+        isAbortOnError = false
+    }
 }
 
 configure<ApkDependencyGraphPluginExtension> {
@@ -52,7 +58,20 @@ configure<ApkDependencyGraphPluginExtension> {
 
 dependencies {
     "implementation"("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.21")
-    "implementation"("com.android.support:appcompat-v7:28.0.0")
-    "implementation"("com.android.support:support-v4:28.0.0")
+    "implementation"("androidx.appcompat:appcompat:1.0.2")
+
+    "implementation"("com.github.terrakok:cicerone:5.0.0")
+
+    "implementation"("tech.schoolhelper:moxy-x:1.7.0")
+    "implementation"("tech.schoolhelper:moxy-x-androidx:1.7.0")
+    "kapt"("tech.schoolhelper:moxy-x-compiler:1.7.0")
+
+    "implementation"("io.reactivex.rxjava2:rxjava:2.2.7")
+    "implementation"("io.reactivex.rxjava2:rxandroid:2.1.1")
+    "implementation"("io.reactivex.rxjava2:rxkotlin:2.3.0")
+
+    "implementation"("com.github.stephanenicolas.toothpick:toothpick-runtime:1.1.3")
+    "kapt"("com.github.stephanenicolas.toothpick:toothpick-compiler:1.1.3")
+
 }
 

@@ -1,4 +1,4 @@
-package com.acterics.dependencygraph.web.base
+package com.acterics.dependencygraph.web.app
 
 abstract class Application {
     abstract val stateKeys: List<String>

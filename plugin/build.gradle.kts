@@ -7,7 +7,7 @@ plugins {
     id("com.gradle.plugin-publish") version "0.10.0"
 }
 
-version = "0.11.4"
+version = "0.11.5"
 group = "com.acterics"
 
 repositories {

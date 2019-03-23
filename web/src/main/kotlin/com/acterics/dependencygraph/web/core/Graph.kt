@@ -1,6 +1,4 @@
-package com.acterics.dependencygraph.web
-
-import com.acterics.dependencygraph.web.interop.D3JsGraph
+package com.acterics.dependencygraph.web.core
 
 class Graph {
     private val nodes: MutableList<Node> = mutableListOf()
@@ -9,8 +7,8 @@ class Graph {
     private var nodeIndex: Int = 0
 
 
-    fun addLink(link: DependencyLink) {
-        println("Add link: ${link.source} -> ${link.dest}")
+    fun addLink(link: Dependency) {
+        println("Add links: ${link.source} -> ${link.dest}")
 
         val sourceNode = getNode(link.source)
         sourceNode.source++
@@ -36,10 +34,10 @@ class Graph {
         nodes.forEach(function)
     }
 
-    fun d3Graph(): D3JsGraph {
+    fun d3Graph(): D3Graph {
         val nodes = nodesSet.values.sortedBy { it.id }
         println("d3 graph with nodes: ${nodes.size}, links: ${links.size}")
-        return D3JsGraph(nodes.toTypedArray(), links.toTypedArray())
+        return D3Graph(nodes.toTypedArray(), links.toTypedArray())
     }
 
 
@@ -49,7 +47,7 @@ class Graph {
             val graph = Graph()
 
             dependencies.forEach { link ->
-                graph.addLink(DependencyLink(link.source as String, link.dest as String))
+                graph.addLink(Dependency(link.source as String, link.dest as String))
             }
 
             graph.updateNodes { node ->
@@ -61,18 +59,11 @@ class Graph {
 
     }
 
+    data class Dependency(val source: String, val dest: String)
 
 }
 
-data class DependencyLink(val source: String, val dest: String)
 
-data class Node(val id: Int,
-                val name: String,
-                var source: Int,
-                var dest: Int,
-                var weight: Int = 0)
 
-data class Link(val source: Int,
-                val target: Int,
-                val sourceNode: Node,
-                val targetNode: Node)
+
+
