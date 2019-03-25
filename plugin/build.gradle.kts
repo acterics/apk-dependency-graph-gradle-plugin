@@ -5,9 +5,10 @@ plugins {
     `java-gradle-plugin`
     `maven-publish`
     id("com.gradle.plugin-publish") version "0.10.0"
+    id("nu.studer.credentials") version "1.0.7"
 }
 
-version = "0.11.5"
+version = "0.12.0"
 group = "com.acterics"
 
 repositories {
@@ -31,7 +32,7 @@ configure<PublishingExtension> {
 }
 
 configure<PluginBundleExtension> {
-   website = "https://github.com/acterics"
+   website = "https://github.com/acterics/apk-dependency-graph-gradle-plugin"
    vcsUrl = "https://github.com/acterics/apk-dependency-graph-gradle-plugin"
    tags = listOf("android", "apk-dependency-graph")
 }
