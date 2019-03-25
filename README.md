@@ -12,7 +12,7 @@ In your app `build.gradle`
 
 ```groovy
 plugins {
-  id "com.acterics.apk-dependency-graph-generator" version "0.11.4"
+  id "com.acterics.apk-dependency-graph-generator" version "0.12.0"
 }
 ```
 
@@ -26,7 +26,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.com.acterics.apk-dependency-graph-generator:apk-dependency-core-gradle-plugin:0.11.4"
+    classpath "gradle.plugin.com.acterics.apk-dependency-graph-generator:apk-dependency-core-gradle-plugin:0.12.0"
   }
 }
 
