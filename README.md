@@ -26,7 +26,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.com.acterics.apk-dependency-graph-generator:apk-dependency-core-gradle-plugin:0.12.0"
+    classpath "com.acterics:plugin:0.12.0"
   }
 }
 
@@ -36,7 +36,7 @@ apply plugin: "com.acterics.apk-dependency-graph-generator"
 ### Configure plugin
 
 ```groovy
-ppkDependencyGraphPluginExtension {
+apkDependencyGraph {
     filterPackage = "com.acterics"
     includeInnerClasses = false
     apkPath = "${project.buildDir.absolutePath}/outputs/apk/debug/sample-debug.apk"
